@@ -13,7 +13,7 @@ define('MODULE','app');                //MVC模块
 define('CONF',MYPROJECT.'/conf');      //数据库配置文件
 define('URL','index.php/');            //数据库配置文件
 
-define('DEBUG',true);                  //是否开启调试模式
+define('DEBUG',false);                  //是否开启调试模式
 if(DEBUG){
     ini_set('display_error',On);
 }else{
