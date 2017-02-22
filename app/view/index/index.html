@@ -1,20 +1,175 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>计算器</title>
+    <style>
+        *{
+                 padding:0;
+                 margin:0;
+        }
+        body{
+            font-family:"微软雅黑";
+        }
+        table{
+            margin:0 auto;
+            width:300px;
+            border=0;
+            cellpadding=0;
+            cellspacing=1;
+            bgcolor=000
+        }
+        td{
+            text-align:center;
+            vertical-align:middle;
+            background:#ccc;
+            color:#000;
+            width:75px;
+            height:60px;
+        }
+        .rtd{
+            background:#FA9440;
+            color:#000;
+        }
+        .result{
+            width:302px;
+            height:102px;
+            border:1px solid #000;
+            background:#9A9A9A;
+            text-align:right;
+            font-size:60px;
+            color:#fff;
+            position:relative;
+
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script>
+        var num = 0;		//输入的数字
+        var result = 0; 	//结果集
+        var status = 0; 	//状态;0表示数字;1表示运算符
+        var operator = 0;	//运算符;0为初始值 12345表示加减乘除余;
+        var nownum = 0;		//当前文本数字
+        //显示输入框数字
+
+        function show(num){
+            var str = String($(".result").val());
+            str = (str != "0") ? ((status == 0) ? str : "") : "";
+            str = str + String(num);
+            $(".result").val(str);
+            status = 0;
+        }
+        function jia(){		//加
+            jisuan();
+            status = 1;
+            operator = 1;
+        }
+        function jian(){	//减
+            jisuan();
+            status = 1;
+            operator = 2;
+        }
+        function cheng(){	//乘
+            jisuan();
+            status = 1;
+            operator = 3;
+        }
+        function chu(){		//除
+            jisuan();
+            status = 1;
+            operator = 4;
+        }
+        function yu(){		//取余
+            jisuan();
+            status = 1;
+            operator = 5;
+        }
+        function dengyu(){	//等于
+            jisuan();
+            status = 1;
+            num = 0;
+            result = 0;
+            nownum = 0;
+        }
+        function dian(){	//小数点
+            var str = String($(".result").val());
+            str=str + ".";
+            $(".result").val(str);
+            status = 0;
+        }
+        function init(){	//清空初始化
+            $(".result").val("0");
+            status = 0;
+            operator = 0;
+        }
+        function zhengfu(){	//正负值
+            var str = Number($(".result").val());
+            str = str * -1;
+            $(".result").val(str);
+            status = 0;
+        }
+        function jisuan(){	//计算
+            nownum = Number($(".result").val());
+            if(num != 0){
+                if(operator == 1){
+                    result = num + nownum;
+                }
+                if(operator == 2){
+                    result = num-nownum;
+                }
+                if(operator == 3){
+                    result = num * nownum;
+                }
+                if(operator == 4){
+                    result = num / nownum;
+                }
+                if(operator == 5){
+                    result = num % nownum;
+                }
+            }else{
+                result = nownum;
+            }
+            nownum = String(result);
+            $(".result").val(nownum);
+            num = result;
+        }
+    </script>
 </head>
+
 <body>
-<table border="1">
+<table>
     <tr>
-        <th><a href="good">id</a></th>
-        <th>name</th>
+        <td colspan="4"><input type="value" class="result" value="0" name="result"/></td>
     </tr>
-    <?php foreach($data as $row){ ?>
-        <tr>
-            <td><?php echo $row[id] ; ?></td>
-            <td><?php echo $row[name] ; ?></td>
-        </tr>
-    <?php } ?>
+    <tr>
+        <td onclick="init()">AC</button></td>
+        <td onclick="zhengfu()">+/-</td>
+        <td onclick="yu()">％</td>
+        <td onclick="chu()" class="rtd">÷</td>
+    </tr>
+    <tr>
+        <td onclick="show(7)">7</td>
+        <td onclick="show(8)">8</td>
+        <td onclick="show(9)">9</td>
+        <td onclick="cheng()" class="rtd">×</td>
+    </tr>
+    <tr>
+        <td onclick="show(4)">4</td>
+        <td onclick="show(5)">5</td>
+        <td onclick="show(6)">6</td>
+        <td onclick="jian()" class="rtd">－</td>
+    </tr>
+    <tr>
+        <td onclick="show(1)">1</td>
+        <td onclick="show(2)">2</td>
+        <td onclick="show(3)">3</td>
+        <td onclick="jia()" class="rtd">＋</td>
+    </tr>
+    <tr>
+        <td onclick="show(0)" height="60" colspan="2" >0</td>
+        <td onclick="dian()">·</td>
+        <td onclick="dengyu()" class="rtd"">＝</td>
+    </tr>
 </table>
 </body>
-
 </html>
