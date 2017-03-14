@@ -41,7 +41,8 @@ class myProject{
         $this->assign[$name] = $value;
     }
     public function display($file){
-        $ctrl = str_replace('Ctrl','',end(explode('\\',get_called_class())));
+        $end = explode('\\',get_called_class());
+        $ctrl = str_replace('Ctrl','',end($end));
         $file = APP."/view/".$ctrl."/".$file.".html";
         extract($this->assign);
         if(is_file($file)){
