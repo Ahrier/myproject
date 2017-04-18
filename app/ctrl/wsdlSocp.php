@@ -5,7 +5,7 @@
  */
 class HandInterface
 {
-    //获得code地址
+    //获得code地址1
     const URLCODE =         "http://gomrodev.train.going-link.com/wsdl/modules/cux/GOMRO/WS/AUTH/itf_client_auth.svc";
     //获得access_token地址
     const URLACCESSTOKEN =  "http://gomrodev.train.going-link.com/wsdl/modules/cux/GOMRO/WS/AUTH/itf_client_access_token.svc";
